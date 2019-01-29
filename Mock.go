@@ -22,6 +22,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/quoeamaster/echogogo_plugin"
+	"math/rand"
 	"net/http"
 	"strings"
 	"time"
@@ -78,22 +79,6 @@ func extractPathParamMock(method string) (methodName string, isJsonResponse bool
 }
 
 /* (m *MockModule)  */
-func DoAction(request http.Request, endPoint string, optionalMap ...map[string]interface{}) interface{}  {
-	modelPtr := new(MockModuleModel)
-	method, isJsonResponse := extractPathParamMock(echogogo.ExtractPathParameterFromUrl(request.URL.Path, endPoint))
-
-
-
-	// setup the return model
-	modelPtr.MockMethodName = method
-	modelPtr.Timestamp = time.Now().UTC()
-	modelPtr.TimestampEpoch = modelPtr.Timestamp.UnixNano()
-	modelPtr.isJsonResponse = isJsonResponse
-
-	return *modelPtr
-}
-
-/* (m *MockModule)  */
 func GetRestConfig() map[string]interface{} {
 	/* TODO: either read from a file or simply overwrite it programmatically.... */
 	mapModelPtr := make(map[string]interface{})
@@ -109,4 +94,36 @@ func GetRestConfig() map[string]interface{} {
 		"POST::/configMockEndPoints",
 	}
 	return mapModelPtr
+}
+
+
+/* (m *MockModule)  */
+func DoAction(request http.Request, endPoint string, optionalMap ...map[string]interface{}) interface{}  {
+	modelPtr := new(MockModuleModel)
+	method, isJsonResponse := extractPathParamMock(echogogo.ExtractPathParameterFromUrl(request.URL.Path, endPoint))
+
+	// TODO: add logics to check whether a mock instruction is available or not...
+	modelPtr.ResponseBody = randomMessageGeneratorMock()
+
+	// setup the return model
+	modelPtr.MockMethodName = method
+	modelPtr.Timestamp = time.Now().UTC()
+	modelPtr.TimestampEpoch = modelPtr.Timestamp.UnixNano()
+	modelPtr.isJsonResponse = isJsonResponse
+
+	return *modelPtr
+}
+
+
+var randomMessagesMock = [3]string{
+	"Life is soooo Good.",
+	"With great power comes great responsibility",
+	"I shall shed my light over dark evil",
+}
+
+// default "mock" result if no other mocking instructions are available
+func randomMessageGeneratorMock() string {
+	random := rand.New(rand.NewSource(time.Now().UnixNano()))
+	idx := random.Intn(len(randomMessagesMock))
+	return randomMessagesMock[idx]
 }
