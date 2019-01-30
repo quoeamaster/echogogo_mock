@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f50c01e-d3c6-46b2-a27f-0eb5570ab60a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Mock.go" beforeDir="false" afterPath="$PROJECT_DIR$/Mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gopkg.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,10 +13,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mock.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
+            <state relative-caret-position="902">
               <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
               <folding>
                 <element signature="n#!!block;n#String#0" />
@@ -24,7 +25,53 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sampleMockInstructions.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="77" column="33" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint.feature">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="118" selection-start-line="15" selection-start-column="118" selection-end-line="15" selection-end-column="118" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+              <folding>
+                <element signature="e#20#74#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MockLoader.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="62" lean-forward="true" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" path="/usr/local/Cellar/go/1.11.4/libexec" />
   <component name="Git.Settings">
@@ -37,7 +84,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Gopkg.toml" />
+        <option value="$PROJECT_DIR$/sampleMockInstructions.json" />
+        <option value="$PROJECT_DIR$/features/configMockEndpoint.feature" />
         <option value="$PROJECT_DIR$/Mock.go" />
+        <option value="$PROJECT_DIR$/features/configMockEndpoint_test.go" />
+        <option value="$PROJECT_DIR$/test/features/configMockEndpoint_test.go" />
+        <option value="$PROJECT_DIR$/MockLoader.go" />
+        <option value="$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go" />
       </list>
     </option>
   </component>
@@ -52,6 +105,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -59,14 +113,25 @@
               <item name="echogogo_mock" type="b2602c69:ProjectViewProjectNode" />
               <item name="echogogo_mock" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="echogogo_mock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="echogogo_mock" type="462c0819:PsiDirectoryNode" />
+              <item name="features" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="echogogo_mock" type="b2602c69:ProjectViewProjectNode" />
+              <item name="echogogo_mock" type="462c0819:PsiDirectoryNode" />
+              <item name="features" type="462c0819:PsiDirectoryNode" />
+              <item name="basicTest" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
@@ -74,6 +139,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/features/basicTest" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/test" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -91,7 +163,7 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25885227" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26495728" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -123,12 +195,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sampleMockInstructions.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="77" column="33" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint.feature">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="118" selection-start-line="15" selection-start-column="118" selection-end-line="15" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Mock.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
+        <state relative-caret-position="902">
           <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
           <folding>
             <element signature="n#!!block;n#String#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MockLoader.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="62" lean-forward="true" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
+          <folding>
+            <element signature="e#20#74#0" expanded="true" />
           </folding>
         </state>
       </provider>

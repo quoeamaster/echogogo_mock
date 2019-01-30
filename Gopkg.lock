@@ -2,6 +2,26 @@
 
 
 [[projects]]
+  digest = "1:142cf0c63cd0fc3cc0fdd26854cb028bb33d569f1b80de05f353cd45850e688b"
+  name = "github.com/DATA-DOG/godog"
+  packages = [
+    ".",
+    "colors",
+    "gherkin",
+  ]
+  pruneopts = "UT"
+  revision = "75562b12d67aa758aba65b0072c763bccf7e9b00"
+  version = "v0.7.9"
+
+[[projects]]
+  branch = "master"
+  digest = "1:c275798cda0af923c65a65bd1708e6bd073b98828140631aec3b9fe465038053"
+  name = "github.com/quoeamaster/echogogo_mock"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "6a1a24383ff5e00e65183337e4f2ef6059212393"
+
+[[projects]]
   branch = "master"
   digest = "1:83850116d98ab8e178e4a1695e9e76aaca4294d6c90a859cd03b3e980b98acdb"
   name = "github.com/quoeamaster/echogogo_plugin"
@@ -12,6 +32,10 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["github.com/quoeamaster/echogogo_plugin"]
+  input-imports = [
+    "github.com/DATA-DOG/godog",
+    "github.com/quoeamaster/echogogo_mock",
+    "github.com/quoeamaster/echogogo_plugin",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,0 +1,92 @@
+{
+  "GET": [
+    {
+      "method": "getAuthors",
+      "conditions": [
+        {
+          "explanation": "empty params (e.g. params: []) means ANY condition",
+          "params": [],
+          "returnJson": [
+            { "id": 1, "firstName": "Jacky", "lastName": "Leung" },
+            { "id": 2, "firstName": "Amelia", "lastName": "Cheung" },
+            { "id": 13, "firstName": "Eliza", "lastName": "Beth" }
+          ],
+          "returnXml": "<authors> <author><id>13</id><firstName>Eliza</firstName><lastName>Beth</lastName></author> <author><id>1</id><firstName>Jacky</firstName><lastName>Leung</lastName></author> <author><id>2</id><firstName>Amelia</firstName><lastName>Cheung</lastName></author> </authors>"
+        }
+      ]
+    },
+    {
+      "method": "getAuthorById",
+      "conditions": [
+        {
+          "params": [
+            { "id": 13 }
+          ],
+          "returnJson": [
+            { "id": 13, "firstName": "Eliza", "lastName": "Beth" }
+          ],
+          "returnXml": "<author><id>13</id><firstName>Eliza</firstName><lastName>Beth</lastName></author>"
+        },
+        {
+          "explanation": "return empty array as no such author",
+          "params": [
+            { "id": 999 }
+          ],
+          "returnJson": [],
+          "returnXml": ""
+        }
+      ]
+    }
+  ],
+
+  "PUT": [
+    {
+      "method": "addAuthor",
+      "conditions": [
+        {
+          "params": [
+            { "id": 4, "firstName": "Mary Lee", "lastName": "Jones" }
+          ],
+          "returnJson": [
+            { "id": 4, "firstName": "Mary Lee", "lastName": "Jones" }
+          ],
+          "returnXml": "<author><id>4</id><firstName>Mary Lee</firstName><lastName>Jones</lastName></author>"
+        }
+      ]
+    }
+  ],
+
+  "POST": [
+    {
+      "method": "modifyAuthorById",
+      "conditions": [
+        {
+          "params": [
+            { "id": 2, "lastName": "CHEONG" }
+          ],
+          "returnJson": [
+            { "id": 2, "firstName": "Amelia", "lastName": "CHEONG" }
+          ],
+          "returnXml": "<author><id>2</id><firstName>Amelia</firstName><lastName>CHEONG</lastName></author>"
+        }
+      ]
+    }
+  ],
+
+  "DELETE": [
+    {
+      "method": "removeAuthorById",
+      "conditions": [
+        {
+          "params": [
+            { "id": 1 }
+          ],
+          "returnJson": [
+            { "id": 1, "firstName": "Jacky", "lastName": "Leung" }
+          ],
+          "returnXml": "<author><id>1</id><firstName>Jacky</firstName><lastName>Leung</lastName></author>"
+        }
+      ]
+    }
+  ]
+}
