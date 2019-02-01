@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0f50c01e-d3c6-46b2-a27f-0eb5570ab60a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gopkg.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MockLoader.go" beforeDir="false" afterPath="$PROJECT_DIR$/MockLoader.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/basicTest/configMockEndpoint.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basic_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/Basic_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mock.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-83">
+            <state>
               <caret selection-end-line="17" selection-end-column="3" />
               <folding>
                 <element signature="n#!!block;n#String#0" />
@@ -54,11 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Basic_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="47" column="32" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-              <folding>
-                <element signature="e#794#822#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="520">
+              <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -66,10 +60,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MockLoader.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
+            <state relative-caret-position="1185">
               <caret line="241" column="52" selection-start-line="241" selection-start-column="21" selection-end-line="241" selection-end-column="52" />
               <folding>
-                <element signature="e#793#841#0" expanded="true" />
                 <element signature="n#!!block;n#String#0" />
                 <element signature="n#!!block;n#Load#0" />
                 <element signature="n#!!block;n#parseMockInstructionFromBytes#0" />
@@ -125,7 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,6 +129,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -172,7 +165,7 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26495728" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26800978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -204,9 +197,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go" />
+    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint.feature" />
     <entry file="file://$PROJECT_DIR$/Mock.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-83">
+        <state>
           <caret selection-end-line="17" selection-end-column="3" />
           <folding>
             <element signature="n#!!block;n#String#0" />
@@ -214,12 +209,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint_test.go">
+    <entry file="file://$PROJECT_DIR$/MockLoader.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="1185">
+          <caret line="241" column="52" selection-start-line="241" selection-start-column="21" selection-end-line="241" selection-end-column="52" />
           <folding>
-            <element signature="e#20#110#0" expanded="true" />
+            <element signature="n#!!block;n#String#0" />
+            <element signature="n#!!block;n#Load#0" />
+            <element signature="n#!!block;n#parseMockInstructionFromBytes#0" />
+            <element signature="n#!!block;n#parseMockConditionsFromBytes#0" />
+            <element signature="n#!!block;n#parseMockConditionParamsFromBytes#0" />
           </folding>
         </state>
       </provider>
@@ -231,35 +230,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/features/basicTest/configMockEndpoint.feature">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="54" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MockLoader.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="241" column="52" selection-start-line="241" selection-start-column="21" selection-end-line="241" selection-end-column="52" />
-          <folding>
-            <element signature="e#793#841#0" expanded="true" />
-            <element signature="n#!!block;n#String#0" />
-            <element signature="n#!!block;n#Load#0" />
-            <element signature="n#!!block;n#parseMockInstructionFromBytes#0" />
-            <element signature="n#!!block;n#parseMockConditionsFromBytes#0" />
-            <element signature="n#!!block;n#parseMockConditionParamsFromBytes#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Basic_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="32" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-          <folding>
-            <element signature="e#794#822#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="520">
+          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
         </state>
       </provider>
     </entry>

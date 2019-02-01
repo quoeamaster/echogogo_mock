@@ -42,13 +42,38 @@ func TestBasicWorkflow(t *testing.T)  {
 	}
 
 	// scenario(s)
-	t.Run("1", func(t *testing.T) {
+	t.Run("1. basic workflow testing (load, parse, get mock-instructions)", func(t *testing.T) {
 		model := loaderPtr.GetMockInstructionByMethodNVerb("getAuthorById", "GET")
-		// TODO: verify the results... no assertions in golang... hm
-		fmt.Printf("%v\n", model)
+		// verify the results... no assertions in golang... hm
+		if !assertMockInstructionModelValid(t, model) {
+			t.Errorf("mock instruction model is invalid, should consists of 'method' and 'conditions', got => %v\n", model)
+		}
+		// verify params level
+		paramsArray := model.Conditions[0].Params
+		if len(paramsArray) == 0 {
+			t.Errorf("should consists of at least 1 set of parameters, got => %v\n", paramsArray)
+		}
+		for _, param := range paramsArray {
+			if param["id"] != "13" && param["id"] != "999" {
+				t.Errorf("parameter 'id' should be available, got => %v\n", param["id"])
+			}
+		}
+		fmt.Printf("\t### method (%v) retrieved successfully!\n\n", model.Method)
 	})
 
-
 	// tear down code
+}
+
+// assertion method to check if model passed is valid or not
+func assertMockInstructionModelValid(t *testing.T, model mockInstructionModel) (valid bool) {
+	t.Helper()
+
+	valid = true
+	if model.Method == "" {
+		valid = false
+	} else if len(model.Conditions) == 0 {
+		valid = false
+	}
+	return
 }
 
