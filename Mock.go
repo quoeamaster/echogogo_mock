@@ -161,7 +161,7 @@ func getMockResultMock(model *mockInstructionModel, isJsonResponse bool, request
 			paramsMatched = true
 			// return the response, assume additional params are ignored
 			if isJsonResponse {
-				result = cond.ReturnJson
+				result = prepareJsonForDisplayMock(cond.ReturnJson)
 			} else {
 				result = cond.ReturnXml
 			}
@@ -189,7 +189,7 @@ func getMockResultMock(model *mockInstructionModel, isJsonResponse bool, request
 			}	// end -- for (per param match check)
 			if paramsMatched {
 				if isJsonResponse {
-					result = cond.ReturnJson
+					result = prepareJsonForDisplayMock(cond.ReturnJson)
 				} else {
 					result = cond.ReturnXml
 				}
@@ -199,6 +199,21 @@ func getMockResultMock(model *mockInstructionModel, isJsonResponse bool, request
 			}	// end -- if (paramsMatch - all match scenario)
 		}
 	}	// end -- for (conditions)
+	return
+}
+
+// method to "pretty" the json string a bit
+// TODO: convert to Map instead...
+func prepareJsonForDisplayMock(val string) (value string) {
+	var contentInBytes bytes.Buffer
+
+	for _, char := range val {
+		if char != '\n' && char != ' ' {
+			contentInBytes.WriteRune(char)
+		}
+	}
+	value = contentInBytes.String()
+
 	return
 }
 
