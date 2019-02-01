@@ -25,6 +25,7 @@ import (
 	"testing"
 )
 
+// test basic flow of the mock instruction loading
 func TestBasicWorkflow(t *testing.T)  {
 	// setup code
 	filename := "sampleMockInstructions.json"

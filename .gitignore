@@ -16,3 +16,7 @@ vendor/*
 
 # some scripts
 copy*.sh
+
+# testing.html
+testing.html
+

@@ -21,7 +21,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/buger/jsonparser"
 	"github.com/quoeamaster/echogogo_plugin"
+	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -97,28 +99,134 @@ func GetRestConfig() map[string]interface{} {
 }
 
 
-/* (m *MockModule)  */
-func DoAction(request http.Request, endPoint string, optionalMap ...map[string]interface{}) interface{}  {
-	modelPtr := new(MockModuleModel)
-	method, isJsonResponse := extractPathParamMock(echogogo.ExtractPathParameterFromUrl(request.URL.Path, endPoint))
-
-	// TODO: add logics to check whether a mock instruction is available or not...
-	modelPtr.ResponseBody = randomMessageGeneratorMock()
-
-	// setup the return model
-	modelPtr.MockMethodName = method
-	modelPtr.Timestamp = time.Now().UTC()
-	modelPtr.TimestampEpoch = modelPtr.Timestamp.UnixNano()
-	modelPtr.isJsonResponse = isJsonResponse
-
-	return *modelPtr
-}
+/* ====================================== */
+/* =	DoAction - request handling		= */
+/* ====================================== */
 
 
 var randomMessagesMock = [3]string{
 	"Life is soooo Good.",
 	"With great power comes great responsibility",
 	"I shall shed my light over dark evil",
+}
+
+var mockInstructionsLoader mockLoader
+
+/* (m *MockModule)  */
+func DoAction(request http.Request, endPoint string, optionalMap ...map[string]interface{}) interface{}  {
+	modelPtr := new(MockModuleModel)
+	method, isJsonResponse := extractPathParamMock(echogogo.ExtractPathParameterFromUrl(request.URL.Path, endPoint))
+
+	switch method {
+	case "/configMockEndPoints":
+		err := loadMockConfigMock(request)
+		if err != nil {
+			return err
+		} else {
+			// prepare the responseBody message
+			prepareMockModuleModel(modelPtr, method, "mock instructions loaded", isJsonResponse, time.Now())
+		}
+	default:
+		// add logics to check whether a mock instruction is available or not...
+		if len(mockInstructionsLoader.mockInstructionsMap) > 0 {
+			// looking for mock instructions
+			methodNameWOSlash := method[1:]
+			mockInModel := mockInstructionsLoader.GetMockInstructionByMethodNVerb(methodNameWOSlash, request.Method)
+			// check validity... example an empty struct is NOT valid...
+			if mockInModel.Method == "" && len(mockInModel.Conditions) == 0 {
+				prepareMockModuleModel(modelPtr, method, "no such mock API to simulate~", isJsonResponse, time.Now())
+			} else {
+				bodyMsg, err := getMockResultMock(&mockInModel, isJsonResponse, request)
+				if err != nil {
+					return err
+				}
+				prepareMockModuleModel(modelPtr, method, bodyMsg, isJsonResponse, time.Now())
+			}
+		} else {
+			prepareMockModuleModel(modelPtr, method, randomMessageGeneratorMock(), isJsonResponse, time.Now())
+		}
+	}
+	return *modelPtr
+}
+
+// verify the conditions and check if any mocked result should be returned instead
+func getMockResultMock(model *mockInstructionModel, isJsonResponse bool, request http.Request) (result string, err error) {
+	contentInBytes, err := ioutil.ReadAll(request.Body)
+
+	for _, cond := range model.Conditions {
+		paramsMatched := false
+
+		// either 0 or 1 set of params ONLY
+		if len(cond.Params) == 0 {
+			paramsMatched = true
+			// return the response, assume additional params are ignored
+			if isJsonResponse {
+				result = cond.ReturnJson
+			} else {
+				result = cond.ReturnXml
+			}
+			break
+
+		} else {
+			paramsMap := cond.Params[0]
+			// assume all matched and set to false when unmatch case occurs
+			paramsMatched = true
+			for param, paramVal := range paramsMap {
+				valBytes, _, _, err1 := jsonparser.Get(contentInBytes, param)
+				if err1 != nil {
+					if strings.Index(err1.Error(), "Key path not found") != -1 {
+						paramsMatched = false
+						break
+					} else {
+						err = err1
+						return
+					}
+				}	// end -- if (err1 valid, check if it was the case of unmatched key -> continue)
+				if paramVal != string(valBytes) {
+					paramsMatched = false
+					break
+				}
+			}	// end -- for (per param match check)
+			if paramsMatched {
+				if isJsonResponse {
+					result = cond.ReturnJson
+				} else {
+					result = cond.ReturnXml
+				}
+				break
+			} else {
+				result = "mock api found, but non-matchable params found, hence no results~"
+			}	// end -- if (paramsMatch - all match scenario)
+		}
+	}	// end -- for (conditions)
+	return
+}
+
+// DoAction routing method - handles /configMockEndPoints
+func loadMockConfigMock(request http.Request) (err error) {
+	contentInBytes, err := ioutil.ReadAll(request.Body)
+	if err != nil {
+		return
+	}
+	// try to load and parse it...
+	mockInstructionsLoader = *newMockLoader(contentInBytes)
+	err = mockInstructionsLoader.Load(nil)
+
+	return
+}
+
+func prepareMockModuleModel(modelPtr *MockModuleModel, method, responseBody string, isJsonResponse bool, timestamp time.Time) *MockModuleModel {
+	modelPtr.MockMethodName = method
+	if timestamp.Nanosecond() > 0 {
+		modelPtr.Timestamp = timestamp.UTC()
+		modelPtr.TimestampEpoch = modelPtr.Timestamp.UnixNano()
+	}
+	if responseBody != "" {
+		modelPtr.ResponseBody = responseBody
+	}
+	modelPtr.isJsonResponse = isJsonResponse
+
+	return modelPtr
 }
 
 // default "mock" result if no other mocking instructions are available
