@@ -38,6 +38,8 @@ type MockModuleModel struct {
 	TimestampEpoch int64
 
 	isJsonResponse bool
+
+	ResponseBodyArray []map[string]interface{}
 }
 
 // return the string representation of the Model
@@ -91,8 +93,8 @@ func GetRestConfig() map[string]interface{} {
 	mapModelPtr["endPoints"] = []string {
 		"GET::/{method}", "GET::/json/{method}", "GET::/xml/{method}",
 		"POST::/{method}", "POST::/json/{method}", "POST::/xml/{method}",
-		"PUT::/{method}", "POST::/json/{method}", "POST::/xml/{method}",
-		"DELETE::/{method}", "POST::/json/{method}", "POST::/xml/{method}",
+		"PUT::/{method}", "PUT::/json/{method}", "PUT::/xml/{method}",
+		"DELETE::/{method}", "DELETE::/json/{method}", "DELETE::/xml/{method}",
 		"POST::/configMockEndPoints",
 	}
 	return mapModelPtr
@@ -203,7 +205,6 @@ func getMockResultMock(model *mockInstructionModel, isJsonResponse bool, request
 }
 
 // method to "pretty" the json string a bit
-// TODO: convert to Map instead...
 func prepareJsonForDisplayMock(val string) (value string) {
 	var contentInBytes bytes.Buffer
 
@@ -237,11 +238,45 @@ func prepareMockModuleModel(modelPtr *MockModuleModel, method, responseBody stri
 		modelPtr.TimestampEpoch = modelPtr.Timestamp.UnixNano()
 	}
 	if responseBody != "" {
-		modelPtr.ResponseBody = responseBody
+		if isJsonResponse == true {
+			if isValidJsonString(responseBody) {
+				// handle the array of map
+				modelPtr.ResponseBodyArray = make([]map[string]interface{}, 0)
+				jsonparser.ArrayEach([]byte(responseBody), func(value []byte, dataType jsonparser.ValueType, offset int, err error) {
+					if err == nil {
+						// iterate the "keys" and "values" of the Object
+						valueMap := make(map[string]interface{})
+						jsonparser.ObjectEach(value, func(key []byte, value []byte, dataType jsonparser.ValueType, offset int) error {
+							valueMap[string(key)] = string(value)
+							return nil
+						})
+						modelPtr.ResponseBodyArray = append(modelPtr.ResponseBodyArray, valueMap)
+					} else {
+						fmt.Printf("%v: %v\n", responseBody, err)
+					}	// end - if (err is nil)
+				})
+			} else {
+				modelPtr.ResponseBodyArray = make([]map[string]interface{}, 0)
+				valueMap := make(map[string]interface{})
+				valueMap["message"] = responseBody
+				modelPtr.ResponseBodyArray = append(modelPtr.ResponseBodyArray, valueMap)
+			}
+		} else {
+			modelPtr.ResponseBody = responseBody
+		}
 	}
 	modelPtr.isJsonResponse = isJsonResponse
 
 	return modelPtr
+}
+
+func isValidJsonString(jsonString string) (validJson bool) {
+	if strings.HasPrefix(strings.Trim(jsonString, " "), "[") {
+		validJson = true
+	} else {
+		validJson = false
+	}
+	return
 }
 
 // default "mock" result if no other mocking instructions are available

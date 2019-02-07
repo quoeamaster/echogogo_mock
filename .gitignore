@@ -20,3 +20,5 @@ copy*.sh
 # testing.html
 testing.html
 
+# restTester.go
+restTester.go
